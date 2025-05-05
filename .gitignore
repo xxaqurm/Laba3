@@ -1,0 +1,4 @@
+# ignore cpp bin files
+*.out
+
+.vscode/
