@@ -1,4 +1,3 @@
-#include "primality_tests.h"
 #include "utils.h"
 
 #include <vector>
