@@ -6,7 +6,7 @@ using namespace std;
 using ll = long long;
 
 double compute_series_sum(int a, int b, int iters=1000) {
-    /**/
+    /*Находит сумму 1000 итераций*/
     double sum = 0;
     for (int n = 1; n <= iters; n++) {
         sum += pow(n, a) / pow(b, n);
