@@ -14,7 +14,7 @@ double compute_series_sum(int a, int b, int iters=1000) {
     return sum;
 }
 
-vector<double> is_rational(double x, double e) {  // numerator , denominator , state
+vector<double> is_rational(double x, double eps) {  // numerator , denominator , state
     /*Проверяет число на рациональность*/
     double denominator = 1;
     double numerator = 1;
@@ -29,7 +29,7 @@ vector<double> is_rational(double x, double e) {  // numerator , denominator , s
         }
         difference = abs(x - (numerator / denominator));
         iter++;
-        if (difference < e) {
+        if (difference < eps) {
             return {numerator, denominator, 1};
         }
     }
@@ -46,9 +46,9 @@ int main() {
         cout << "Infinity" << endl;
     } else {
         double total = compute_series_sum(a, b);
-        double e = pow(10, -10);
+        double eps = pow(10, -10);
 
-        vector<double> result = is_rational(total, e);
+        vector<double> result = is_rational(total, eps);
 
         if (!result[2]) {
             cout << "Irrational" << endl;
