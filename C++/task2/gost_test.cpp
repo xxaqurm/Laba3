@@ -2,7 +2,7 @@
 
 #include <random>
 #include <cmath>
-#include <iostream>  //fjdklsjlskdjflksjdf
+
 using namespace std;
 using ll = long long;
 
@@ -28,7 +28,7 @@ ll gost_test(int t, ll q) {  // t - требуемая размерность п
         if (n & 1) {
             n++;
         }
-        cout << "N: " << n << endl;
+        
         p = (n + u) * q + 1;  // кандидат в простые
     }
     
