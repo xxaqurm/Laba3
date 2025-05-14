@@ -22,7 +22,7 @@ int main() {
 
     // Обрабатываем позиции с конца к началу
     for (int i = n - 1; i >= 0; i--) {
-        for (int j = 1; j <= m && i + j <= n; ++j) {
+        for (int j = 1; j <= m && i + j <= n; j++) {
             int sum = prefix_sum[i + j] - prefix_sum[i]; // сумма взятых чисел
             dp[i] = max(dp[i], sum - dp[i + j]); // макс разность очков
         }

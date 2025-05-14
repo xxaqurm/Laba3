@@ -22,7 +22,7 @@ void printResults(const vector<double>& timeSteps, const vector<double>& tempera
     cout << "|  Время (мин)  |  Температура (°C)  |\n";
     cout << "----------------------------------------\n";
     
-    for (size_t i = 0; i < timeSteps.size(); ++i) {
+    for (size_t i = 0; i < timeSteps.size(); i++) {
         cout << "|" << setw(10) << timeSteps[i] << setw(7) << " |"
              << setw(14) << fixed << setprecision(2) << temperatures[i] << setw(8) << " |\n";
     }
@@ -50,8 +50,8 @@ int main() {
     
     vector<double> timeSteps(num_meas);
     cout << "Введите моменты времени для измерений (в минутах):\n";
-    for (int i = 0; i < num_meas; ++i) {
-        cout << "Измерение " << i+1 << ": ";
+    for (int i = 0; i < num_meas; i++) {
+        cout << "Измерение " << i + 1 << ": ";
         cin >> timeSteps[i];
     }
     
