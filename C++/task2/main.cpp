@@ -1,15 +1,14 @@
-#include "utils.h"
-#include "primality_tests.h"
-
 #include <iostream>
 #include <vector>
+#include <random>
+#include "prime_algorithms.h"
+#include "utils.h"
 
 using namespace std;
+using ull = unsigned long long;
 
 int main() {
-    int t = 4;
-    int q = 3;
+    vector<int> primes = eratosthenesSieve();
 
-    cout << gost_test(t, q);
-    return 0;
+    
 }

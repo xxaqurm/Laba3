@@ -1,13 +1,14 @@
-#ifndef UTILS_H  // Защита от двойного включения
-#define UTILS_H
+#ifndef UTILS
+#define UTILS
 
 #include <vector>
 
 using namespace std;
-using ll = long long;
+using ull = unsigned long long;
 
-vector<int> eratosthenes_sieve(int p, int n);
-vector<pair<int, int>> prime_factors(ll n);
-ll mod_pow(ll a, ll b, ll m);
+vector<int> eratosthenesSieve(int limit = 500);
+vector<pair<int, int>> factorize(ull num);
+int modPow(ull a, ull exp, ull m);
+int sizeNum(ull n);
 
 #endif

@@ -1,64 +1,66 @@
-#include "utils.h"
-
 #include <vector>
+#include <cmath>
 
 using namespace std;
-using ll = long long;
+using ull = unsigned long long;
 
-vector<int> eratosthenes_sieve(int p, int n) {
-    /* Создание решета Эратосфена */
-    vector<int> nums;
-    for (int i = p; i <= n; i++) {
-        nums.push_back(i);
-    }
+vector<int> eratosthenesSieve(int limit) {
+    /* Строит решето Эратосфена */
+    vector<bool> is_prime(limit + 1, true);
+    is_prime[0] = is_prime[1] = false;
 
-    for (int i = p; i * i < n - p; i++) {
-        for (int j = i * i; j < n; j += i) {
-            nums[j - p] = 0;
+    for (int p = 2; p * p <= limit; p++) {
+        if (is_prime[p]) {
+            for (int i = p * p; i <= limit; i += p) {
+                is_prime[i] = false;
+            }
         }
     }
 
-    vector<int> res;
-    for (int i = 0; i < n - p; i++) {
-        if (nums[i]) {
-            res.push_back(nums[i]);
+    vector<int> primes;
+    for (int i = 2; i <= limit; ++i) {
+        if (is_prime[i]) {
+            primes.push_back(i);
         }
+    }
+
+    return primes;
+}
+
+vector<pair<int, int>> factorize(ull num) {  // pair<base, exponent>
+    /* Находит каноническое разложение числа */
+    vector<pair<int, int>> result;
+    vector<int> primes = eratosthenesSieve(500);
+    
+    for (auto& primeElm : primes) {
+        int exponent = 0;
+        while (num % primeElm == 0 && num > 0) {
+            exponent++;
+            num /= primeElm;
+        }
+        if (exponent) {
+            result.push_back({primeElm, exponent});
+        }
+    }
+
+    return result;
+}
+
+int modPow(ull a, ull exp, ull m) {
+    /* Находит a mod n */
+    int res = 1;
+    int base = a % m;
+    while (exp > 0) {
+        if (exp & 1) {
+            res = (res * base) % m;
+        }
+        base = (base * base) % m;
+        exp >>= 1;
     }
     return res;
 }
 
-ll mod_pow(ll a, ll b, ll m) {
-    /* Функция для выполнения операции (a^b) mod m */
-    ll result = 1 % m;
-    ll base = a % m;
-
-    while (b > 0) {
-        if (b & 1) {  // если степень не четная
-            result = (result * base) % m;
-        }
-        base = (base * base) % m;
-        b >>= 1;
-    }
-    return result;
-}
-
-vector<pair<int, int>> prime_factors(ll n) {
-    /* Каноническое разложение числа */
-    vector<pair<int, int>> factors;
-    if (n == 0) return factors;
-
-    for (int i = 2; i * i <= n; i++) {
-        if (n % i == 0) {
-            int exponent = 0;
-            while (n % i == 0) {
-                exponent++;
-                n /= i;
-            }
-            factors.push_back({i, exponent});
-        }
-    }
-    if (n > 1) {
-        factors.push_back({n, 1});
-    }
-    return factors;
+int sizeNum(ull n) {
+    /* Находит размер числа в битах */
+    return (int)log2(n);
 }

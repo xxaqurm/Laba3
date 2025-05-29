@@ -1,7 +1,7 @@
-all: program.out
+all: program.out;
 
-program.out: main.cpp utils.cpp miller_test.cpp
-	g++ main.cpp utils.cpp pocklington_test.cpp gost_test.cpp -o program.out
+program.out: prime_algorithms.cpp utils.cpp main.cpp
+	g++ prime_algorithms.cpp utils.cpp main.cpp -o program.out -Wall
 
 clean:
 	rm -f program.out
