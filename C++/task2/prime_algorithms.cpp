@@ -175,7 +175,7 @@ pair<ull, int> gost_prime(int num_size, vector<int> primes) {
 
         u = 0;
         p = (n + u) * q + 1;
-        if (p <= (int)pow(2, num_size)) {
+        if (p <= (ull)pow(2, num_size)) {
             break;
         }
     }

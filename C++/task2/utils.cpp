@@ -1,5 +1,8 @@
+#include <iostream>
+#include <iomanip>
 #include <vector>
 #include <cmath>
+#include <set>
 
 using namespace std;
 using ull = unsigned long long;
@@ -63,4 +66,26 @@ int modPow(ull a, ull exp, ull m) {
 int sizeNum(ull n) {
     /* Находит размер числа в битах */
     return (int)log2(n);
+}
+
+void printTable(set<tuple<pair<ull, int>, bool>> data) {
+    int colWidth = 15;
+    for (auto& elm : data) {
+        cout << setw(colWidth) << left << get<0>(elm).first;
+    }
+    cout << endl;
+
+    for (auto& elm : data) {
+        if (get<1>(elm)) {
+            cout << setw(colWidth) << left << "+";
+        } else {
+            cout << setw(colWidth) << left << "-";
+        }
+    }
+    cout << endl;
+
+    for (auto& elm : data) {
+        cout << setw(colWidth) << left << get<0>(elm).second;
+    }
+    cout << endl;
 }
