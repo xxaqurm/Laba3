@@ -30,7 +30,9 @@ int main() {
 
     if (dp[0] > 0) {
         cout << "Победил Паша!" << endl;
-    } else {
+    } else if (dp[0] < 0) {
         cout << "Победила Вика!" << endl;
+    } else {
+        cout << "Ничья!" << endl;
     }
 }
