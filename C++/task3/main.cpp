@@ -53,7 +53,7 @@ int main() {
         if (!result[2]) {
             cout << "Irrational" << endl;
         } else {
-            cout << result[0] << " / " << result[1];
+            cout << result[0] << " / " << result[1] << endl;
         }
     }
 }

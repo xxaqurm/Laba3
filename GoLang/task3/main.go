@@ -5,55 +5,56 @@ import (
 	"math"
 )
 
-func compute_series_sum(a float64, b float64) float64 {
-	/* Находит сумму 1000 итераций */
-	iters := 1000.0
-	var sum float64 = 0
-	for n := 1.0; n <= iters; n++ {
-		sum += math.Pow(n, a) / math.Pow(b, n)
+// computeSeriesSum вычисляет сумму ряда с заданными a и b
+func computeSeriesSum(a, b int, iters int) float64 {
+	sum := 0.0
+	for n := 1; n <= iters; n++ {
+		sum += math.Pow(float64(n), float64(a)) / math.Pow(float64(b), float64(n))
 	}
 	return sum
 }
 
-func is_rational(x float64, eps float64) (int, int, int) {
-	/* Проверяет число на рациональность */
-	var denominator float64 = 1
-	var numerator float64 = 1
-	var difference float64 = math.Abs(x - (numerator / denominator))
-	iters := 100
+// isRational проверяет, является ли число рациональным в пределах точности eps
+// Возвращает числитель, знаменатель и булев флаг (true, если рационально)
+func isRational(x, eps float64) (numerator, denominator float64, rational bool) {
+	numerator = 1
+	denominator = 1
+	iter := 0
 
-	for i := 0; i <= iters; i++ {
-		if numerator / denominator < x {
+	for iter < 100 {
+		approx := numerator / denominator
+		diff := math.Abs(x - approx)
+		if diff < eps {
+			return numerator, denominator, true
+		}
+		if approx < x {
 			numerator++
 		} else {
 			denominator++
 		}
-		difference = math.Abs(x - (numerator / denominator))
-		if difference < eps {
-			return int(numerator), int(denominator), 1
-		}
+		iter++
 	}
-	return int(numerator), int(denominator), 0
+	return numerator, denominator, false
 }
 
 func main() {
-	a := 1
-	b := 1
-	fmt.Print("Ввведите свои a и b: ")
+	var a, b int
+	fmt.Print("Введите свои a и b: ")
 	fmt.Scan(&a, &b)
 
 	if b == 1 {
 		fmt.Println("Infinity")
+		return
+	}
+
+	total := computeSeriesSum(a, b, 1000)
+	eps := math.Pow(10, -10)
+
+	num, denom, rational := isRational(total, eps)
+
+	if rational {
+		fmt.Printf("%.0f / %.0f\n", num, denom)
 	} else {
-		var total float64 = compute_series_sum(float64(a), float64(b))
-		var eps float64 = math.Pow(10, -10)
-
-		numerator, denominator, state := is_rational(total, eps)
-
-		if state == 0 {
-			fmt.Println("Irrational")
-		} else {
-			fmt.Printf("%d/%d \n", numerator, denominator)
-		}
+		fmt.Println("Irrational")
 	}
 }
